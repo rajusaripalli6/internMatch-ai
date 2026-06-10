@@ -2,10 +2,10 @@ export async function createInternship(
   internshipData,
   token
 ) {
-
+const API_URL = import.meta.env.VITE_API_URL
   const response =
     await fetch(
-      "http://localhost:5000/internships",
+      `${API_URL}/internships`,
       {
         method: "POST",
 
@@ -47,7 +47,7 @@ getMyInternships(
 
     await fetch(
 
-      "http://localhost:5000/my-internships",
+      `${API_URL}/my-internships`,
 
       {
 
@@ -93,7 +93,7 @@ deleteInternship(
 
     await fetch(
 
-      `http://localhost:5000/internships/${internshipId}`,
+      `${API_URL}/internships/${internshipId}`,
 
       {
 
@@ -142,7 +142,7 @@ updateInternship(
 
     await fetch(
 
-      `http://localhost:5000/internships/${internshipId}`,
+      `${API_URL}/internships/${internshipId}`,
 
       {
 

@@ -1,9 +1,11 @@
+
 export async function getMyApplications(
   token
 ) {
-
+const API_URL =
+  import.meta.env.VITE_API_URL
   const response = await fetch(
-    "http://localhost:5000/my-applications",
+    `${API_URL}/my-applications`,
     {
       headers: {
         Authorization:
@@ -30,10 +32,10 @@ export async function getMatchScore(
   internshipId,
   token
 ) {
-
+const API_URL = import.meta.env.VITE_API_URL
   const response =
     await fetch(
-      `http://localhost:5000/match-score/${internshipId}`,
+      `${API_URL}/match-score/${internshipId}`,
       {
         headers: {
           Authorization:
@@ -65,7 +67,7 @@ getApplicants(
   const response =
     await fetch(
 
-      "http://localhost:5000/my-applicants",
+      `${API_URL}/my-applicants`,
 
       {
 
@@ -114,7 +116,7 @@ updateApplicationStatus(
 
     await fetch(
 
-      `http://localhost:5000/applications/${applicationId}`,
+      `${API_URL}/applications/${applicationId}`,
 
       {
 

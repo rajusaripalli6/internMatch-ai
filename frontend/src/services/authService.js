@@ -1,59 +1,116 @@
-export async function loginUser(email, password) {
 
-  const response = await fetch(
-    "http://localhost:5000/login",
-    {
-      method: "POST",
+const API_URL =
+  import.meta.env.VITE_API_URL
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    }
-  )
-
-  const data = await response.json()
-
-  if (!response.ok) {
-    throw new Error(data.message)
-  }
-
-  return data
-}
-export async function registerUser(
-  name,
+export async function loginUser(
   email,
-  password,
-  role
+  password
 ) {
 
-  const response = await fetch(
-    "http://localhost:5000/register",
-    {
-      method: "POST",
+  const response =
 
-      headers: {
-        "Content-Type": "application/json",
-      },
+    await fetch(
 
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-        role,
-      }),
-    }
-  )
+      `${API_URL}/login`,
 
-  const data = await response.json()
+      {
 
-  if (!response.ok) {
-    throw new Error(data.message)
+        method: "POST",
+
+        headers: {
+
+          "Content-Type":
+            "application/json",
+
+        },
+
+        body: JSON.stringify({
+
+          email,
+
+          password,
+
+        }),
+
+      }
+
+    )
+
+  const data =
+    await response.json()
+
+  if (
+    !response.ok
+  ) {
+
+    throw new Error(
+      data.message
+    )
+
   }
 
   return data
+
+}
+
+export async function registerUser(
+
+  name,
+
+  email,
+
+  password,
+
+  role
+
+) {
+
+  const response =
+
+    await fetch(
+
+      `${API_URL}/register`,
+
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "Content-Type":
+            "application/json",
+
+        },
+
+        body: JSON.stringify({
+
+          name,
+
+          email,
+
+          password,
+
+          role,
+
+        }),
+
+      }
+
+    )
+
+  const data =
+    await response.json()
+
+  if (
+    !response.ok
+  ) {
+
+    throw new Error(
+      data.message
+    )
+
+  }
+
+  return data
+
 }

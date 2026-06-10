@@ -1,7 +1,7 @@
 export async function getInternships() {
-
+const API_URL = import.meta.env.VITE_API_URL
   const response = await fetch(
-    "http://localhost:5000/internships"
+    `${API_URL}/internships`
   )
 
   const data =
@@ -26,7 +26,7 @@ export async function applyToInternship(
 
   const response = await fetch(
 
-    `http://localhost:5000/apply/${internshipId}`,
+    `${API_URL}/apply/${internshipId}`,
 
     {
 

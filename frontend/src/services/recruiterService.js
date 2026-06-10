@@ -1,10 +1,10 @@
 export async function getApplicants(
   token
 ) {
-
+const API_URL = import.meta.env.VITE_API_URL
   const response =
     await fetch(
-      "http://localhost:5000/my-applicants",
+      `${API_URL}/my-applicants`,
       {
         headers: {
           Authorization:
@@ -36,7 +36,7 @@ export async function updateApplicationStatus(
 
   const response =
     await fetch(
-      `http://localhost:5000/applications/${applicationId}`,
+      `${API_URL}/applications/${applicationId}`,
       {
         method: "PATCH",
 

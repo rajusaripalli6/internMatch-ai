@@ -2,10 +2,10 @@ export async function updateSkills(
   skills,
   token
 ) {
-
+const API_URL = import.meta.env.VITE_API_URL
   const response =
     await fetch(
-      "http://localhost:5000/update-skills",
+      `${API_URL}/update-skills`,
       {
         method: "PUT",
 
@@ -54,7 +54,7 @@ export async function uploadResume(
   const response =
     await fetch(
 
-      "http://localhost:5000/upload-resume",
+      `${API_URL}/upload-resume`,
 
       {
         method: "POST",
@@ -93,7 +93,7 @@ getProfile(
   const response =
     await fetch(
 
-      "http://localhost:5000/profile",
+      `${API_URL}/profile`,
 
       {
         headers: {
