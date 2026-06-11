@@ -11,13 +11,18 @@ import {
 import {
   getMatchScore
 } from "../services/applicationService"
+import { toast }
+from "react-toastify"
 
 export default function Internships() {
 
   const [internships,
     setInternships] =
     useState([])
-
+  const [
+  searchTerm,
+  setSearchTerm
+] = useState("")
   const [matchScores,
     setMatchScores] =
     useState({})
@@ -30,9 +35,7 @@ export default function Internships() {
     setError] =
     useState("")
 
-  const [message,
-    setMessage] =
-    useState("")
+  
 
   async function handleApply(
     internshipId
@@ -50,13 +53,13 @@ export default function Internships() {
         token
       )
 
-      setMessage(
+      toast.success(
         "✅ Application submitted successfully!"
       )
 
     } catch (error) {
 
-      setMessage(
+      toast.error(
         error.message
       )
 
@@ -195,7 +198,32 @@ export default function Internships() {
     )
 
   }
+  const filteredInternships =
+  internships.filter(
+    internship =>
 
+      internship.title
+        .toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        )
+
+      ||
+
+      internship.company
+        .toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        )
+
+      ||
+
+      internship.location
+        .toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        )
+  )
   return (
 
     <MainLayout>
@@ -221,24 +249,33 @@ export default function Internships() {
 
         </p>
 
-        {message && (
+        
+      <input
 
-          <div className="
-            bg-green-100
-            border
-            border-green-300
-            text-green-700
-            rounded-lg
-            p-3
-            mb-6
-          ">
+            type="text"
 
-            {message}
+            placeholder="
+          Search internships...
+          "
 
-          </div>
+            value={searchTerm}
 
-        )}
+            onChange={(e) =>
+              setSearchTerm(
+                e.target.value
+              )
+            }
 
+            className="
+              w-full
+              mb-6
+              p-4
+              border
+              rounded-xl
+              shadow-sm
+            "
+
+          />
         <div className="
           grid
           grid-cols-1
@@ -247,7 +284,7 @@ export default function Internships() {
           gap-6
         ">
 
-          {internships.map(
+          {filteredInternships.map(
 
             (
               internship

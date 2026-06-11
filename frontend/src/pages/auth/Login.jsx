@@ -29,6 +29,8 @@ export default function Login() {
 
   const [errors, setErrors] =
     useState({})
+  const [loading, setLoading] =
+  useState(false)
 
   const { login } =
     useContext(AuthContext)
@@ -36,7 +38,7 @@ export default function Login() {
   const navigate =
     useNavigate()
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
 
     e.preventDefault()
 
@@ -66,7 +68,7 @@ export default function Login() {
       return
 
     }
-
+    setLoading(true)
     loginUser(
       email,
       password
@@ -114,7 +116,7 @@ export default function Login() {
         })
 
       .catch((error) => {
-
+          setLoading(false)
         setErrors({
 
           general:
@@ -274,7 +276,13 @@ export default function Login() {
           )}
 
           <Button
-            text="Login"
+            text={
+              loading
+                ? "Logging in..."
+                : "Login"
+            }
+
+            disabled={loading}
           />
 
           <p className="

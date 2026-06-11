@@ -16,15 +16,20 @@ import Profile
 from "./pages/student/Profile"
 import RecruiterApplicants
 from "./pages/recruiter/RecruiterApplicants"
+import { ToastContainer }
+from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 function App() {
   return (
     <BrowserRouter>
-    
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
+
+        <Routes>
+
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route
             path="/student/dashboard"
             element={
               <ProtectedRoute>
@@ -32,20 +37,22 @@ function App() {
               </ProtectedRoute>
             }
           />
-        
-        <Route path="/internships" element={<Internships />}/>
-              <Route
 
-                  path="/my-applications"
+          <Route
+            path="/internships"
+            element={<Internships />}
+          />
 
-                  element={
-                    <ProtectedRoute>
-                      <MyApplications />
-                    </ProtectedRoute>
-                  }
+          <Route
+            path="/my-applications"
+            element={
+              <ProtectedRoute>
+                <MyApplications />
+              </ProtectedRoute>
+            }
+          />
 
-                />
-        <Route
+          <Route
             path="/recruiter/dashboard"
             element={
               <ProtectedRoute>
@@ -62,26 +69,33 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
-              path="/profile"
-                element={
+            path="/profile"
+            element={
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
             }
-
           />
+
           <Route
-          path="/recruiter/applicants"
-              element={
+            path="/recruiter/applicants"
+            element={
               <ProtectedRoute>
                 <RecruiterApplicants />
               </ProtectedRoute>
-
             }
+          />
+
+        </Routes>
+
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
         />
-      </Routes>
-    </BrowserRouter>
+
+</BrowserRouter>
   )
 }
 

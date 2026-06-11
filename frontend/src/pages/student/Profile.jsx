@@ -12,7 +12,8 @@ import {
   getProfile
 }
 from "../../services/profileService"
-
+import { toast }
+from "react-toastify"
 const availableSkills = [
 
   "React",
@@ -46,9 +47,7 @@ export default function Profile() {
     setResume] =
     useState(null)
 
-  const [message,
-    setMessage] =
-    useState("")
+  
 
   useEffect(() => {
 
@@ -123,7 +122,7 @@ export default function Profile() {
 
       if (!resume) {
 
-        alert(
+        toast.error(
           "Please select a PDF."
         )
 
@@ -154,7 +153,7 @@ export default function Profile() {
 
     } catch (error) {
 
-      alert(
+      toast.error(
         error.message
       )
 
@@ -163,56 +162,68 @@ export default function Profile() {
   }
 
   async function
-  handleSave(
-    e
-  ) {
+handleSave(
+  e
+) {
 
-    e.preventDefault()
+  e.preventDefault()
 
-    try {
+  try {
 
-      const token =
-        localStorage.getItem(
-          "token"
+    const token =
+      localStorage.getItem(
+        "token"
+      )
+
+    const updatedSkills =
+
+      skills
+        .split(",")
+        .map(
+          skill =>
+            skill.trim()
+        )
+        .filter(
+          skill =>
+            skill !== ""
         )
 
-      const updatedSkills =
+    if (
+      updatedSkills.length === 0
+    ) {
 
-        skills
-          .split(",")
-          .map(
-            skill =>
-              skill.trim()
-          )
-          .filter(
-            skill =>
-              skill !== ""
-          )
-
-      await updateSkills(
-        updatedSkills,
-        token
+      toast.error(
+        "Please enter at least one skill"
       )
 
-      setSavedSkills(
-        updatedSkills
-      )
-
-      setSkills("")
-
-      setMessage(
-        "✅ Skills updated successfully!"
-      )
-
-    } catch (error) {
-
-      alert(
-        error.message
-      )
+      return
 
     }
 
+    await updateSkills(
+      updatedSkills,
+      token
+    )
+
+    setSavedSkills(
+      updatedSkills
+    )
+
+    setSkills("")
+
+    toast.success(
+      "Skills updated successfully!"
+    )
+
+  } catch (error) {
+
+    toast.error(
+      error.message
+    )
+
   }
+
+}
 
   return (
 
@@ -236,24 +247,7 @@ export default function Profile() {
           My Profile
         </h1>
 
-        {message && (
-
-          <div className="
-            bg-green-100
-            border
-            border-green-400
-            text-green-700
-            px-4
-            py-3
-            rounded-lg
-            mb-6
-          ">
-
-            {message}
-
-          </div>
-
-        )}
+        
 
         <div className="mb-6">
 

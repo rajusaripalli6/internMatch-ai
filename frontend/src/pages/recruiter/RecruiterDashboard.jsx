@@ -22,7 +22,12 @@ import {
   useNavigate
 }
 from "react-router-dom"
-
+import { toast }
+from "react-toastify"
+import {
+  getApplicants
+}
+from "../../services/applicationService"
 export default function
 RecruiterDashboard() {
 const navigate =
@@ -34,6 +39,10 @@ const navigate =
     setInternships
 
   ] = useState([])
+  const [
+  applications,
+  setApplications
+] = useState([])
 
   const [
 
@@ -93,6 +102,24 @@ const navigate =
         setInternships(
           data.internships
         )
+        const applicantData =
+          await getApplicants(
+            token
+          )
+
+          console.log(
+            "APPLICANTS DATA:",
+            applicantData
+          )
+
+          console.log(
+            "APPLICATIONS:",
+            applicantData.applications
+          )
+
+          setApplications(
+            applicantData.applications
+          )
 
       } catch (
         error
@@ -197,7 +224,7 @@ const navigate =
         null
       )
 
-      alert(
+      toast.success(
         "✅ Internship updated successfully!"
       )
 
@@ -205,7 +232,7 @@ const navigate =
       error
     ) {
 
-      alert(
+      toast.error(
         error.message
       )
 
@@ -268,7 +295,7 @@ const navigate =
       error
     ) {
 
-      alert(
+      toast.error(
         error.message
       )
 
@@ -295,7 +322,34 @@ const navigate =
     )
 
   }
+  console.log(
+  "applications state:",
+  applications
+)
+const totalInternships =
+  internships.length
+  
 
+const totalApplicants =
+  applications.length
+
+const accepted =
+  applications.filter(
+    app =>
+      app.status === "accepted"
+  ).length
+
+const rejected =
+  applications.filter(
+    app =>
+      app.status === "rejected"
+  ).length
+
+const pending =
+  applications.filter(
+    app =>
+      app.status === "pending"
+  ).length
   return (
 
     <MainLayout>
@@ -322,7 +376,95 @@ const navigate =
           My Posted Internships
 
         </p>
+        <div className="
+          grid
+          grid-cols-2
+          md:grid-cols-5
+          gap-4
+          mb-8
+        ">
 
+          <div className="
+            bg-white
+            p-5
+            rounded-2xl
+            shadow-lg
+            text-center
+          ">
+            <h3>Total Internships</h3>
+            <p className="
+              text-3xl
+              font-bold
+            ">
+              {totalInternships}
+            </p>
+          </div>
+
+          <div className="
+            bg-white
+            p-5
+            rounded-2xl
+            shadow-lg
+            text-center
+          ">
+            <h3>Applicants</h3>
+            <p className="
+              text-3xl
+              font-bold
+            ">
+              {totalApplicants}
+            </p>
+          </div>
+
+          <div className="
+            bg-white
+            p-5
+            rounded-2xl
+            shadow-lg
+            text-center
+          ">
+            <h3>Pending</h3>
+            <p className="
+              text-3xl
+              font-bold
+            ">
+              {pending}
+            </p>
+          </div>
+
+          <div className="
+            bg-white
+            p-5
+            rounded-2xl
+            shadow-lg
+            text-center
+          ">
+            <h3>Accepted</h3>
+            <p className="
+              text-3xl
+              font-bold
+            ">
+              {accepted}
+            </p>
+          </div>
+
+          <div className="
+            bg-white
+            p-5
+            rounded-2xl
+            shadow-lg
+            text-center
+          ">
+            <h3>Rejected</h3>
+            <p className="
+              text-3xl
+              font-bold
+            ">
+              {rejected}
+            </p>
+          </div>
+
+        </div>
         <div className="
           grid
           grid-cols-1

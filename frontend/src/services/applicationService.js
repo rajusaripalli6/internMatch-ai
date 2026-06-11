@@ -1,9 +1,9 @@
-
+const API_URL =
+  import.meta.env.VITE_API_URL
 export async function getMyApplications(
   token
 ) {
-const API_URL =
-  import.meta.env.VITE_API_URL
+
   const response = await fetch(
     `${API_URL}/my-applications`,
     {
@@ -32,7 +32,7 @@ export async function getMatchScore(
   internshipId,
   token
 ) {
-const API_URL = import.meta.env.VITE_API_URL
+
   const response =
     await fetch(
       `${API_URL}/match-score/${internshipId}`,

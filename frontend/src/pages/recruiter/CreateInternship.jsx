@@ -1,5 +1,6 @@
 import { useState } from "react"
-
+import { toast }
+from "react-toastify"
 import MainLayout
 from "../../layouts/MainLayout"
 
@@ -65,7 +66,7 @@ export default function CreateInternship() {
 
       )
 
-      alert(
+      toast.success(
         "Internship created"
       )
 
@@ -77,7 +78,7 @@ export default function CreateInternship() {
 
     } catch (error) {
 
-      alert(
+      toast.error(
         error.message
       )
 
