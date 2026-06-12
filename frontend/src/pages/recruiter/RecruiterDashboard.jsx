@@ -350,6 +350,21 @@ const pending =
     app =>
       app.status === "pending"
   ).length
+  function getApplicantCount(
+        internshipId
+      ) {
+
+        return applications.filter(
+
+          application =>
+
+            application
+              .internship?._id ===
+            internshipId
+
+        ).length
+
+      }
   return (
 
     <MainLayout>
@@ -531,6 +546,21 @@ const pending =
 
                     {
                       internship.location
+                    }
+
+                  </p>
+                  <p>
+
+                    <strong>
+                      Applicants:
+                    </strong>
+
+                    {" "}
+
+                    {
+                      getApplicantCount(
+                        internship._id
+                      )
                     }
 
                   </p>

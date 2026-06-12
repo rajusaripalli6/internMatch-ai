@@ -34,7 +34,15 @@ export default function Internships() {
   const [error,
     setError] =
     useState("")
+  const [
+  selectedLocation,
+  setSelectedLocation
+] = useState("")
 
+const [
+  selectedCompany,
+  setSelectedCompany
+] = useState("")
   
 
   async function handleApply(
@@ -200,30 +208,67 @@ export default function Internships() {
   }
   const filteredInternships =
   internships.filter(
-    internship =>
+    internship => {
 
-      internship.title
-        .toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        )
+      const matchesSearch =
 
-      ||
+        internship.title
+          .toLowerCase()
+          .includes(
+            searchTerm.toLowerCase()
+          )
 
-      internship.company
-        .toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        )
+        ||
 
-      ||
+        internship.company
+          .toLowerCase()
+          .includes(
+            searchTerm.toLowerCase()
+          )
 
-      internship.location
-        .toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        )
+      const matchesLocation =
+
+        selectedLocation === ""
+
+        ||
+
+        internship.location ===
+        selectedLocation
+
+      const matchesCompany =
+
+        selectedCompany === ""
+
+        ||
+
+        internship.company ===
+        selectedCompany
+
+      return (
+        matchesSearch &&
+        matchesLocation &&
+        matchesCompany
+      )
+
+    }
   )
+  const locations = [
+  ...new Set(
+    internships.map(
+      internship =>
+        internship.location
+    )
+  )
+]
+
+const companies = [
+  ...new Set(
+    internships.map(
+      internship =>
+        internship.company
+    )
+  )
+]
   return (
 
     <MainLayout>
@@ -276,6 +321,117 @@ export default function Internships() {
             "
 
           />
+          <div className="
+            flex
+            flex-col
+            md:flex-row
+            gap-4
+            mb-6
+          ">
+
+            <select
+
+              value={selectedLocation}
+
+              onChange={(e) =>
+                setSelectedLocation(
+                  e.target.value
+                )
+              }
+
+              className="
+                border
+                p-3
+                rounded-lg
+              "
+
+            >
+
+              <option value="">
+                All Locations
+              </option>
+
+              {locations.map(
+                location => (
+
+                  <option
+                    key={location}
+                    value={location}
+                  >
+                    {location}
+                  </option>
+
+                )
+              )}
+
+            </select>
+
+            <select
+
+              value={selectedCompany}
+
+              onChange={(e) =>
+                setSelectedCompany(
+                  e.target.value
+                )
+              }
+
+              className="
+                border
+                p-3
+                rounded-lg
+              "
+
+            >
+
+              <option value="">
+                All Companies
+              </option>
+
+              {companies.map(
+                company => (
+
+                  <option
+                    key={company}
+                    value={company}
+                  >
+                    {company}
+                  </option>
+
+                )
+              )}
+
+            </select>
+            <button
+
+              onClick={() => {
+
+                setSearchTerm("")
+                setSelectedLocation("")
+                setSelectedCompany("")
+
+              }}
+
+              className="
+                bg-black
+                text-white
+                px-4
+                py-3
+                rounded-lg
+                border
+                border-black
+                hover:bg-white
+                hover:text-black
+                transition
+              "
+
+            >
+
+              Clear Filters
+
+            </button>
+
+          </div>
         <div className="
           grid
           grid-cols-1
@@ -283,7 +439,38 @@ export default function Internships() {
           lg:grid-cols-3
           gap-6
         ">
+          {filteredInternships.length === 0 && (
 
+              <div className="
+                bg-white
+                p-8
+                rounded-2xl
+                text-center
+                shadow-lg
+                mb-6
+              ">
+
+                <h2 className="
+                  text-2xl
+                  font-bold
+                  mb-2
+                ">
+
+                  No internships found
+
+                </h2>
+
+                <p className="
+                  text-gray-500
+                ">
+
+                  Try another search term.
+
+                </p>
+
+              </div>
+
+            )}
           {filteredInternships.map(
 
             (
@@ -418,6 +605,7 @@ export default function Internships() {
                     </p>
 
                   </div>
+                  
 
                 )}
 

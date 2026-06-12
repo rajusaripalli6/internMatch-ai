@@ -1,5 +1,5 @@
 import Button from "../common/Button"
-
+import { Link } from "react-router-dom"
 export default function HeroSection() {
   return (
     <section className="min-h-[80vh] flex items-center justify-center bg-gray-100">
@@ -18,14 +18,18 @@ export default function HeroSection() {
 
         <div className="flex justify-center gap-4">
 
-          <Button text="Get Started" />
+          <Link to="/register">
+            <Button text="Get Started" />
+          </Link>
 
+          <Link to="/internships">
             <Button
-            text="Learn More"
-            bgColor="bg-white"
-            textColor="text-black"
-            hoverColor="hover:bg-gray-200"
+              text="Browse Internships"
+              bgColor="bg-white"
+              textColor="text-black"
+              hoverColor="hover:bg-gray-200"
             />
+          </Link>
 
         </div>
 
