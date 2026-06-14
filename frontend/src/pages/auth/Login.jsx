@@ -102,8 +102,8 @@ export default function Login() {
           ) {
 
             navigate(
-              "/internships"
-            )
+                "/student/dashboard"
+              )
 
           } else {
 

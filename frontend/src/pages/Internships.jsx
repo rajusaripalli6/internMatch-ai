@@ -43,7 +43,8 @@ const [
   selectedCompany,
   setSelectedCompany
 ] = useState("")
-  
+  const navigate =
+  useNavigate()
 
   async function handleApply(
     internshipId
@@ -640,6 +641,53 @@ const companies = [
           )}
 
         </div>
+        <div className="
+              mt-8
+              flex
+              flex-col
+              md:flex-row
+              gap-4
+            ">
+
+              <button
+                onClick={() =>
+                  navigate(
+                    "/internships"
+                  )
+                }
+                className="
+                  bg-blue-600
+                  hover:bg-blue-700
+                  text-white
+                  px-6
+                  py-3
+                  rounded-lg
+                  font-semibold
+                "
+              >
+                Browse Internships
+              </button>
+
+              <button
+                onClick={() =>
+                  navigate(
+                    "/profile"
+                  )
+                }
+                className="
+                  bg-black
+                  hover:bg-gray-800
+                  text-white
+                  px-6
+                  py-3
+                  rounded-lg
+                  font-semibold
+                "
+              >
+                Update Profile
+              </button>
+
+            </div>
 
       </div>
 

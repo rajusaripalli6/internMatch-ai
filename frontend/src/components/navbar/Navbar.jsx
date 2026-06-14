@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link,NavLink, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 
 import { AuthContext } from "../../context/AuthContext"
@@ -82,18 +82,78 @@ return (
             {user.role === "student" && (
 
               <>
+                <NavLink
 
-                <Link to="/internships">
+                  to="/student/dashboard"
+
+                  className={({ isActive }) =>
+
+                    isActive
+
+                      ? "border-b-2 border-white pb-1"
+
+                      : ""
+
+                  }
+
+                >
+
+                  Dashboard
+
+                </NavLink>
+                <NavLink
+
+                  to="/internships"
+
+                  className={({ isActive }) =>
+
+                    isActive
+                      ? "border-b-2 border-white pb-1"
+                      : ""
+
+                  }
+
+                >
+
                   Internships
-                </Link>
 
-                <Link to="/my-applications">
+                </NavLink>
+
+                <NavLink
+
+                  to="/my-applications"
+
+                  className={({ isActive }) =>
+
+                    isActive
+                      ? "border-b-2 border-white pb-1"
+                      : ""
+
+                  }
+
+                >
+
                   My Applications
-                </Link>
 
-                <Link to="/profile">
+                </NavLink>
+
+                <NavLink
+
+                  to="/profile"
+
+                  className={({ isActive }) =>
+
+                    isActive
+                      ? "border-b-2 border-white pb-1"
+                      : ""
+
+                  }
+
+                >
+
                   Profile
-                </Link>
+
+                </NavLink>
 
               </>
 
@@ -103,13 +163,43 @@ return (
 
               <>
 
-                <Link to="/recruiter/dashboard">
-                  Dashboard
-                </Link>
+                <NavLink
 
-                <Link to="/create-internship">
+                  to="/recruiter/dashboard"
+
+                  className={({ isActive }) =>
+
+                    isActive
+
+                      ? "border-b-2 border-white pb-1"
+
+                      : ""
+
+                  }
+
+                >
+
+                  Dashboard
+
+                </NavLink>
+
+                <NavLink
+
+                  to="/create-internship"
+
+                  className={({ isActive }) =>
+
+                    isActive
+                      ? "border-b-2 border-white pb-1"
+                      : ""
+
+                  }
+
+                >
+
                   Create Internship
-                </Link>
+
+                </NavLink>
 
               </>
 
@@ -164,18 +254,78 @@ return (
             {user.role === "student" && (
 
               <>
+                <NavLink
 
-                <Link to="/internships">
-                  Internships
-                </Link>
+                  to="/student/dashboard"
 
-                <Link to="/my-applications">
+                  className={({ isActive }) =>
+
+                    isActive
+
+                      ? "border-b-2 border-white pb-1"
+
+                      : ""
+
+                  }
+
+                >
+
+                  Dashboard
+
+                </NavLink>
+                <NavLink
+
+                    to="/internships"
+
+                    className={({ isActive }) =>
+
+                      isActive
+                        ? "border-b-2 border-white pb-1"
+                        : ""
+
+                    }
+
+                  >
+
+                    Internships
+
+                  </NavLink>
+
+                <NavLink
+
+                  to="/my-applications"
+
+                  className={({ isActive }) =>
+
+                    isActive
+                      ? "border-b-2 border-white pb-1"
+                      : ""
+
+                  }
+
+                >
+
                   My Applications
-                </Link>
 
-                <Link to="/profile">
+                </NavLink>
+
+                <NavLink
+
+                  to="/profile"
+
+                  className={({ isActive }) =>
+
+                    isActive
+                      ? "border-b-2 border-white pb-1"
+                      : ""
+
+                  }
+
+                >
+
                   Profile
-                </Link>
+
+                </NavLink>
 
               </>
 
@@ -185,13 +335,43 @@ return (
 
               <>
 
-                <Link to="/recruiter/dashboard">
-                  Dashboard
-                </Link>
+                <NavLink
 
-                <Link to="/create-internship">
+                  to="/recruiter/dashboard"
+
+                  className={({ isActive }) =>
+
+                    isActive
+
+                      ? "border-b-2 border-white pb-1"
+
+                      : ""
+
+                  }
+
+                >
+
+                  Dashboard
+
+                </NavLink>
+
+                <NavLink
+
+                  to="/create-internship"
+
+                  className={({ isActive }) =>
+
+                    isActive
+                      ? "border-b-2 border-white pb-1"
+                      : ""
+
+                  }
+
+                >
+
                   Create Internship
-                </Link>
+
+                </NavLink>
 
               </>
 
