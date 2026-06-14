@@ -13,6 +13,13 @@ from "../layouts/MainLayout"
 import {
   getInternshipById
 } from "../services/internshipService"
+import {
+  applyToInternship
+}
+from "../services/internshipService"
+
+import { toast }
+from "react-toastify"
 
 export default function InternshipDetails() {
 
@@ -96,6 +103,38 @@ export default function InternshipDetails() {
     )
 
   }
+  async function
+handleApply() {
+
+  try {
+
+    const token =
+
+      localStorage.getItem(
+        "token"
+      )
+
+    await applyToInternship(
+
+      internship._id,
+
+      token
+
+    )
+
+    toast.success(
+      "Application submitted successfully!"
+    )
+
+  } catch (error) {
+
+    toast.error(
+      error.message
+    )
+
+  }
+
+}
 
   return (
 
@@ -240,6 +279,28 @@ export default function InternshipDetails() {
               {internship.description}
 
             </p>
+            <button
+
+                onClick={
+                    handleApply
+                }
+
+                className="
+                    mt-8
+                    w-full
+                    bg-blue-600
+                    hover:bg-blue-700
+                    text-white
+                    py-3
+                    rounded-lg
+                    font-semibold
+                "
+
+                >
+
+                Apply Now
+
+                </button>
 
           </div>
 
