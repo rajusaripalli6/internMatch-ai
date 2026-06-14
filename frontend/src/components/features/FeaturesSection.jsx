@@ -3,25 +3,44 @@ import FeatureCard from "../cards/FeatureCard"
 export default function FeaturesSection() {
 
   const features = [
-    {
-      title: "AI Recommendations",
-      description:
-        "Get internships matched to your skills and interests.",
-    },
 
-    {
-      title: "Resume Analysis",
-      description:
-        "Analyze resumes and improve ATS scores.",
-    },
+  {
+    title: "AI Skill Matching",
+    description:
+      "Get internship recommendations based on your skills and resume.",
+  },
 
-    {
-      title: "Career Insights",
-      description:
-        "Discover missing skills and career growth paths.",
-    },
-  ]
+  {
+    title: "Resume Upload",
+    description:
+      "Upload your resume and automatically extract relevant skills.",
+  },
 
+  {
+    title: "Application Tracking",
+    description:
+      "Track pending, accepted, and rejected internship applications.",
+  },
+
+  {
+    title: "Smart Internship Search",
+    description:
+      "Search and filter internships by company, location, and skills.",
+  },
+
+  {
+    title: "Recruiter Dashboard",
+    description:
+      "Recruiters can create internships and manage applicants efficiently.",
+  },
+
+  {
+    title: "One-Click Apply",
+    description:
+      "Apply directly from internship listings or detailed internship pages.",
+  },
+
+]
   return (
     <section className="py-20 bg-gray-200">
 
@@ -31,7 +50,13 @@ export default function FeaturesSection() {
           Platform Features
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="
+              grid
+              grid-cols-1
+              md:grid-cols-2
+              lg:grid-cols-3
+              gap-8
+            ">
 
           {features.map((feature, index) => (
             <FeatureCard
