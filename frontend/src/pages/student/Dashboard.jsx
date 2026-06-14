@@ -9,6 +9,10 @@ from "../../services/applicationService"
 import {
   useNavigate
 } from "react-router-dom"
+import {
+  getInternships
+}
+from "../../services/internshipService"
 export default function Dashboard() {
   const [
     applications,
@@ -21,7 +25,10 @@ export default function Dashboard() {
   ] = useState(true)
   const navigate =
   useNavigate()
-  
+  const [
+  recommendedInternships,
+  setRecommendedInternships
+] = useState([])
   useEffect(() => {
 
   async function fetchData() {
@@ -40,6 +47,13 @@ export default function Dashboard() {
 
       setApplications(
         data.applications
+      )
+      const internshipData =
+        await getInternships()
+
+      setRecommendedInternships(
+        internshipData.internships
+          .slice(0, 3)
       )
 
     } catch (error) {
@@ -334,6 +348,77 @@ const pending =
 
               </button>
 
+            </div>
+            <div className="
+          mt-10
+          bg-white
+          rounded-2xl
+          shadow-lg
+          p-6
+        ">
+
+          <h2 className="
+            text-2xl
+            font-bold
+            mb-4
+          ">
+
+            Recommended Internships
+
+          </h2>
+
+          {recommendedInternships.map(
+            internship => (
+
+              <div
+
+                key={
+                  internship._id
+                }
+
+                className="
+                  border-b
+                  py-4
+                "
+
+              >
+
+                <h3 className="
+                  font-bold
+                  text-lg
+                ">
+
+                  {
+                    internship.title
+                  }
+
+                </h3>
+
+                <p className="
+                  text-gray-600
+                ">
+
+                  {
+                    internship.company
+                  }
+
+                </p>
+
+                <p className="
+                  text-gray-500
+                ">
+
+                  {
+                    internship.location
+                  }
+
+                </p>
+
+              </div>
+
+                )
+              )}
+  
             </div>
           </div>
 

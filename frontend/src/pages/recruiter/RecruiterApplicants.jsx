@@ -138,7 +138,7 @@ RecruiterApplicants() {
       error
     ) {
 
-      alert(
+      toast.error(
         error.message
       )
 

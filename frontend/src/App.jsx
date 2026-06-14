@@ -19,6 +19,8 @@ from "./pages/recruiter/RecruiterApplicants"
 import { ToastContainer }
 from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import InternshipDetails
+from "./pages/InternshipDetails"
 function App() {
   return (
     <BrowserRouter>
@@ -86,6 +88,17 @@ function App() {
                 <RecruiterApplicants />
               </ProtectedRoute>
             }
+          />
+          <Route
+
+            path="/internship/:id"
+
+            element={
+              <ProtectedRoute>
+                <InternshipDetails />
+              </ProtectedRoute>
+            }
+
           />
 
         </Routes>

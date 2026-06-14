@@ -60,3 +60,27 @@ export async function applyToInternship(
   return data
 
 }
+export async function
+getInternshipById(id) {
+
+  const response =
+    await fetch(
+
+      `${API_URL}/internships/${id}`
+
+    )
+
+  const data =
+    await response.json()
+
+  if (!response.ok) {
+
+    throw new Error(
+      data.message
+    )
+
+  }
+
+  return data
+
+}

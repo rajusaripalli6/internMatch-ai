@@ -13,6 +13,9 @@ import {
 } from "../services/applicationService"
 import { toast }
 from "react-toastify"
+import {
+  useNavigate
+} from "react-router-dom"
 
 export default function Internships() {
 
@@ -610,29 +613,59 @@ const companies = [
 
                 )}
 
-                <button
+                <div className="
+  flex
+  gap-3
+">
 
-                  onClick={() =>
-                    handleApply(
-                      internship._id
-                    )
-                  }
+  <button
 
-                  className="
-                    w-full
-                    bg-blue-600
-                    hover:bg-blue-700
-                    text-white
-                    py-3
-                    rounded-lg
-                    font-semibold
-                  "
+    onClick={() =>
+      navigate(
+        `/internship/${internship._id}`
+      )
+    }
 
-                >
+    className="
+      flex-1
+      bg-black
+      text-white
+      py-3
+      rounded-lg
+      font-semibold
+    "
 
-                  Apply
+  >
 
-                </button>
+    View Details
+
+  </button>
+
+  <button
+
+    onClick={() =>
+      handleApply(
+        internship._id
+      )
+    }
+
+    className="
+      flex-1
+      bg-blue-600
+      hover:bg-blue-700
+      text-white
+      py-3
+      rounded-lg
+      font-semibold
+    "
+
+  >
+
+    Apply
+
+  </button>
+
+</div>
 
               </div>
 

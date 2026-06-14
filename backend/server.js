@@ -443,6 +443,69 @@ app.get(
 )
 app.get(
 
+  "/internships/:id",
+
+  async (req, res) => {
+
+    try {
+
+      const internship =
+
+        await Internship.findById(
+
+          req.params.id
+
+        )
+
+        .populate(
+          "recruiter",
+          "name email"
+        )
+
+      if (!internship) {
+
+        return res.status(404)
+          .json({
+
+            success: false,
+
+            message:
+              "Internship not found"
+
+          })
+
+      }
+
+      return res.json({
+
+        success: true,
+
+        internship
+
+      })
+
+    } catch (error) {
+
+  console.log(
+    "GET INTERNSHIP ERROR:",
+    error
+  )
+
+  return res.status(500).json({
+
+    success: false,
+
+    message: error.message
+
+  })
+
+}
+
+  }
+
+)
+app.get(
+
   "/my-internships",
 
   authMiddleware,
