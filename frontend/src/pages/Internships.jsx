@@ -588,25 +588,54 @@ const companies = [
 
                     </p>
 
-                    <p className="
-                      text-sm
-                    ">
+                    <div className="
+                  text-sm
+                ">
 
-                      <strong>
-                        Matched Skills:
-                      </strong>
+                  <p>
 
-                      {" "}
+                    <strong>
+                      ✅ Matched Skills:
+                    </strong>
 
-                      {
-                        matchScores[
-                          internship._id
-                        ]
-                        .matchedSkills
-                        .join(", ")
-                      }
+                    {" "}
 
-                    </p>
+                    {
+                      matchScores[
+                        internship._id
+                      ]
+                      .matchedSkills
+                      .join(", ")
+                      ||
+                      "None"
+                    }
+
+                  </p>
+
+                  <p className="
+                    text-red-500
+                    mt-2
+                  ">
+
+                    <strong>
+                      ❌ Missing Skills:
+                    </strong>
+
+                    {" "}
+
+                    {
+                      matchScores[
+                        internship._id
+                      ]
+                      .missingSkills
+                      ?.join(", ")
+                      ||
+                      "None"
+                    }
+
+                  </p>
+
+            </div>
 
                   </div>
                   

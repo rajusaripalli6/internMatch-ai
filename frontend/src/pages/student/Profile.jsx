@@ -114,6 +114,24 @@ export default function Profile() {
     }
 
   }
+  function removeSkill(
+  skillToRemove
+) {
+
+  setSavedSkills(
+
+    savedSkills.filter(
+
+      skill =>
+
+        skill !==
+        skillToRemove
+
+    )
+
+  )
+
+}
 
   async function
   handleResumeUpload() {
@@ -147,9 +165,9 @@ export default function Profile() {
 
       setSkills("")
 
-      setMessage(
-        "✅ Resume uploaded successfully!"
-      )
+      toast.success(
+          "Resume uploaded successfully!"
+        )
 
     } catch (error) {
 
@@ -175,18 +193,22 @@ handleSave(
         "token"
       )
 
-    const updatedSkills =
+    const updatedSkills = [
 
-      skills
-        .split(",")
-        .map(
-          skill =>
-            skill.trim()
-        )
-        .filter(
-          skill =>
-            skill !== ""
-        )
+        ...savedSkills,
+
+        ...skills
+          .split(",")
+          .map(
+            skill =>
+              skill.trim()
+          )
+          .filter(
+            skill =>
+              skill !== ""
+          )
+
+        ]
 
     if (
       updatedSkills.length === 0
@@ -392,11 +414,8 @@ handleSave(
             )
           }
 
-          placeholder="
-Enter skills separated by commas...
-
-Example:
-React, JavaScript, Node.js
+          placeholder="Enter skills separated by commas...
+          Example:React, JavaScript, Node.js
 "
 
           className="
@@ -436,34 +455,56 @@ React, JavaScript, Node.js
 
                 savedSkills.map(
 
-                  (
-                    skill,
-                    index
-                  ) => (
+                (
+                  skill,
+                  index
+                ) => (
 
-                    <span
+                  <div
 
-                      key={index}
+                    key={index}
+
+                    className="
+                      bg-blue-100
+                      text-blue-700
+                      px-3
+                      py-1
+                      rounded-full
+                      text-sm
+                      font-medium
+                      flex
+                      items-center
+                      gap-2
+                    "
+
+                  >
+
+                    {skill}
+
+                    <button
+
+                      onClick={() =>
+                        removeSkill(
+                          skill
+                        )
+                      }
 
                       className="
-                        bg-blue-100
-                        text-blue-700
-                        px-3
-                        py-1
-                        rounded-full
-                        text-sm
-                        font-medium
+                        text-red-500
+                        font-bold
                       "
 
                     >
 
-                      {skill}
+                      ✕
 
-                    </span>
+                    </button>
 
-                  )
+                  </div>
 
                 )
+
+              )
 
               }
 
@@ -472,6 +513,7 @@ React, JavaScript, Node.js
           </div>
 
         )}
+        
 
         <button
 

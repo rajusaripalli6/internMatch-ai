@@ -13,6 +13,11 @@ import {
   getInternships
 }
 from "../../services/internshipService"
+
+import {
+  getMatchScore
+}
+from "../../services/applicationService"
 export default function Dashboard() {
   const [
     applications,
@@ -49,12 +54,73 @@ export default function Dashboard() {
         data.applications
       )
       const internshipData =
-        await getInternships()
+  await getInternships()
 
-      setRecommendedInternships(
-        internshipData.internships
-          .slice(0, 3)
+        const scoredInternships = []
+
+        for (
+          const internship
+          of internshipData.internships
+        ) {
+
+          try {
+
+            const result =
+              await getMatchScore(
+                internship._id,
+                token
+              )
+
+            scoredInternships.push({
+
+              ...internship,
+
+              matchScore:
+                result.score
+
+            })
+
+          } catch {
+
+            scoredInternships.push({
+
+              ...internship,
+
+              matchScore: 0
+
+            })
+
+          }
+
+        }
+
+        scoredInternships.sort(
+
+          (
+            a,
+            b
+          ) =>
+
+            b.matchScore -
+            a.matchScore
+
+        )
+        console.log(
+        "Scored internships:",
+        scoredInternships
       )
+
+      console.log(
+        "Top 3:",
+        scoredInternships.slice(0, 3)
+      )
+
+        setRecommendedInternships(
+
+          scoredInternships
+            .slice(0, 3)
+
+        )
 
     } catch (error) {
 
@@ -91,6 +157,10 @@ const pending =
     app =>
       app.status === "pending"
   ).length
+  console.log(
+  "recommendedInternships:",
+  recommendedInternships
+)
   return (
     <MainLayout>
 
@@ -393,6 +463,33 @@ const pending =
                   }
 
                 </h3>
+                <p
+
+                className={`
+
+                  font-bold
+
+                  ${
+                    internship.matchScore >= 80
+
+                      ? "text-green-600"
+
+                      : internship.matchScore >= 50
+
+                      ? "text-yellow-500"
+
+                      : "text-red-500"
+
+                  }
+
+                `}
+
+              >
+
+                🎯 Match Score:
+                {internship.matchScore}%
+
+              </p>
 
                 <p className="
                   text-gray-600
@@ -418,7 +515,7 @@ const pending =
 
                 )
               )}
-  
+
             </div>
           </div>
 
