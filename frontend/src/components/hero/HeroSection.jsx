@@ -20,20 +20,7 @@ export default function HeroSection() {
       text-center
     ">
 
-      <span className="
-        inline-block
-        bg-blue-100
-        text-blue-700
-        px-4
-        py-2
-        rounded-full
-        font-semibold
-        mb-6
-      ">
-
-        🚀 AI-Powered Internship Platform
-
-      </span>
+      
 
       <h1 className="
         text-5xl

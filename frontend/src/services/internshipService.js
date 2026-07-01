@@ -60,6 +60,45 @@ export async function applyToInternship(
   return data
 
 }
+export async function saveInternship(
+  internshipId,
+  token
+) {
+
+  const response =
+    await fetch(
+
+      `${API_URL}/save-internship/${internshipId}`,
+
+      {
+
+        method: "POST",
+
+        headers: {
+
+          Authorization:
+            `Bearer ${token}`
+
+        }
+
+      }
+
+    )
+
+  const data =
+    await response.json()
+
+  if (!response.ok) {
+
+    throw new Error(
+      data.message
+    )
+
+  }
+
+  return data
+
+}
 export async function
 getInternshipById(id) {
 

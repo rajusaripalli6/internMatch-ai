@@ -726,6 +726,130 @@ app.post(
   }
 
 )
+
+app.post(
+
+  "/save-internship/:id",
+
+  authMiddleware,
+
+  async (
+    req,
+    res
+  ) => {
+
+    try {
+
+      const user =
+        await User.findById(
+          req.user.id
+        )
+
+      const internshipId =
+        req.params.id
+
+      if (
+
+        user.savedInternships.includes(
+          internshipId
+        )
+
+      ) {
+
+        return res.status(400)
+          .json({
+
+            success: false,
+
+            message:
+              "Internship already saved"
+
+          })
+
+      }
+
+      user.savedInternships.push(
+        internshipId
+      )
+
+      await user.save()
+
+      return res.json({
+
+        success: true,
+
+        message:
+          "Internship saved successfully"
+
+      })
+
+    } catch (error) {
+
+      console.log(error)
+
+      return res.status(500)
+        .json({
+
+          success: false,
+
+          message:
+            "Server error"
+
+        })
+
+    }
+
+  }
+
+)
+app.get(
+
+  "/saved-internships",
+
+  authMiddleware,
+
+  async (
+    req,
+    res
+  ) => {
+
+    try {
+
+      const user =
+
+        await User.findById(
+          req.user.id
+        ).populate(
+          "savedInternships"
+        )
+
+      return res.json({
+
+        success: true,
+
+        internships:
+          user.savedInternships
+
+      })
+
+    } catch (error) {
+
+      console.log(error)
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          "Server error"
+
+      })
+
+    }
+
+  }
+
+)
 app.put(
 
   "/internships/:id",
@@ -1162,7 +1286,7 @@ app.get(
             skill.toLowerCase()
         )
 
-      const matchedSkills =
+      
 
         internship.skills.filter(
           skill =>

@@ -33,6 +33,20 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
 
+  savedInternships: [
+
+    {
+
+      type:
+        mongoose.Schema.Types.ObjectId,
+
+      ref:
+        "Internship",
+
+    },
+
+  ],
+
 }, {
   timestamps: true,
 })

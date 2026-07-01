@@ -6,6 +6,7 @@ import MainLayout from "../layouts/MainLayout"
 import {
   getInternships,
   applyToInternship,
+  saveInternship
 } from "../services/internshipService"
 
 import {
@@ -78,6 +79,36 @@ const [
     }
 
   }
+  async function handleSave(
+  internshipId
+) {
+
+  try {
+
+    const token =
+      localStorage.getItem(
+        "token"
+      )
+
+    const data =
+      await saveInternship(
+        internshipId,
+        token
+      )
+
+    toast.success(
+      data.message
+    )
+
+  } catch (error) {
+
+    toast.error(
+      error.message
+    )
+
+  }
+
+}
 
   useEffect(() => {
 
@@ -669,7 +700,30 @@ const companies = [
     View Details
 
   </button>
+<button
 
+  onClick={() =>
+    handleSave(
+      internship._id
+    )
+  }
+
+  className="
+    bg-pink-500
+    hover:bg-pink-600
+    text-white
+    px-4
+    py-2
+    rounded-lg
+    font-semibold
+    mr-3
+  "
+
+>
+
+  ❤️ Save
+
+</button>
   <button
 
     onClick={() =>
