@@ -139,6 +139,10 @@ const [
                 internship._id,
                 token
               )
+              console.log(
+            "Match Score Result:",
+            result
+          )
 
             scores[
               internship._id
@@ -155,6 +159,10 @@ const [
         }
 
         setMatchScores(
+          scores
+        )
+        console.log(
+          "Scores Object:",
           scores
         )
 
@@ -709,7 +717,7 @@ const companies = [
   }
 
   className="
-    bg-pink-500
+    bg-black-500
     hover:bg-pink-600
     text-white
     px-4

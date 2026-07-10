@@ -1266,12 +1266,14 @@ app.get(
 
       if (!internship) {
 
-        return res.status(404)
-          .json({
-            success: false,
-            message:
-              "Internship not found",
-          })
+        return res.status(404).json({
+
+          success: false,
+
+          message:
+            "Internship not found",
+
+        })
 
       }
 
@@ -1281,12 +1283,13 @@ app.get(
         )
 
       const userSkills =
+
         user.skills.map(
           skill =>
             skill.toLowerCase()
         )
 
-      
+      const matchedSkills =
 
         internship.skills.filter(
           skill =>
@@ -1297,18 +1300,33 @@ app.get(
 
         )
 
-      const score =
+      const missingSkills =
 
-        Math.round(
+        internship.skills.filter(
+          skill =>
 
-          (
-            matchedSkills.length /
-
-            internship.skills.length
-
-          ) * 100
+            !userSkills.includes(
+              skill.toLowerCase()
+            )
 
         )
+
+      const score =
+
+        internship.skills.length > 0
+
+          ? Math.round(
+
+              (
+                matchedSkills.length /
+
+                internship.skills.length
+
+              ) * 100
+
+            )
+
+          : 0
 
       return res.json({
 
@@ -1318,16 +1336,7 @@ app.get(
 
         matchedSkills,
 
-        missingSkills:
-
-          internship.skills.filter(
-            skill =>
-
-              !userSkills.includes(
-                skill.toLowerCase()
-              )
-
-          )
+        missingSkills
 
       })
 
@@ -1335,15 +1344,14 @@ app.get(
 
       console.log(error)
 
-      return res.status(500)
-        .json({
+      return res.status(500).json({
 
-          success: false,
+        success: false,
 
-          message:
-            "Server error",
+        message:
+          "Server error",
 
-        })
+      })
 
     }
 
