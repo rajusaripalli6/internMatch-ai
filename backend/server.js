@@ -128,6 +128,21 @@ app.post("/register", async (req, res) => {
       password,
       role,
     } = req.body
+    const passwordRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+
+        if (!passwordRegex.test(password)) {
+
+          return res.status(400).json({
+
+            success: false,
+
+            message:
+              "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+
+          })
+
+        }
 
     if (!name || !email || !password || !role) {
 
